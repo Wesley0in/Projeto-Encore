@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Button, View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { TelaAutenticacao } from './src/TelaAutenticacao';
+import { InputOTPScreen } from './src/InputOTPScreen';
+import { TelaHome } from './src/TelaHome';
 
-export default function App() {
+
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Autenticação">
+        <Stack.Screen 
+        name="Tela de Autenticação" 
+        component={TelaAutenticacao} 
+        />
+        <Stack.Screen 
+        name="InputOTP" 
+        component={InputOTPScreen} 
+        options={{title: 'Tela de Confirmação', headerBackTitle: ''}}
+        />
+        <Stack.Screen 
+        name="Home" 
+        component={TelaHome} 
+        options={{title: 'Home', headerBackTitle: ''}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
